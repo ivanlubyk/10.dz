@@ -14,9 +14,11 @@ class Name(Field):
 
 
 class Phone:
-    def __init__(self, name, phone=None):
-        self.name = name
-        self.phones = [phone] if phone else []
+    def __init__(self, number):
+        self.number = number
+
+    def __str__(self):
+        return self.number
 
 
 
@@ -26,6 +28,8 @@ class Record:
         self.phones = []
 
     def add_phone(self, phone):
+        if not isinstance(phone, Phone):
+            phone = Phone(phone)
         self.phones.append(phone)
 
     def remove_phone(self, phone):
@@ -33,6 +37,8 @@ class Record:
 
     def edit_phone(self, phone, new_phone):
         index = self.phones.index(phone)
+        if not isinstance(new_phone, Phone):
+            new_phone = Phone(new_phone)
         self.phones[index] = new_phone
 
     def __str__(self):
@@ -155,6 +161,4 @@ def primitive_bot():
 
 if __name__ == "__main__":
     primitive_bot()
-    
-       
    
